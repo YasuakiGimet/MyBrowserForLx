@@ -5,6 +5,9 @@ import com.kukuai.daohang.R;
 
 public class Constants {
 
+	public static final int REQUEST_GET_QRCODE = 10010;
+	public static final String EXTRA_QRCODE = "extra_qr_code";
+
 	public static final int[] FAV_DEFAULT_BG = new int[] {
 			R.drawable.navi_default_0, R.drawable.navi_default_4, R.drawable.navi_default_1,
 			R.drawable.navi_default_3, R.drawable.navi_default_2

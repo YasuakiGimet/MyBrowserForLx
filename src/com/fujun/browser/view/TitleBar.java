@@ -31,6 +31,7 @@ import com.fujun.browser.activity.FavHisActivity;
 import com.fujun.browser.activity.HomeActivity;
 import com.fujun.browser.constants.Constants;
 import com.fujun.browser.utils.Utils;
+import com.fujun.zxing.CaptureActivity;
 import com.kukuai.daohang.R;
 
 public class TitleBar extends LinearLayout implements OnClickListener {
@@ -202,6 +203,11 @@ public class TitleBar extends LinearLayout implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.titlebar_more_btn:
+				((HomeActivity) getContext()).startActivityForResult(
+						new Intent(getContext(), CaptureActivity.class),
+						Constants.REQUEST_GET_QRCODE);
+				break;
 			case R.id.titlebar_refresh:
 				mTab.refresh();
 				break;
@@ -210,6 +216,7 @@ public class TitleBar extends LinearLayout implements OnClickListener {
 					((HomeActivity) getContext()).startActivityForResult(
 							new Intent(getContext(), FavHisActivity.class),
 							Constants.FAV_ACTIVITY_REQUEST_CODE);
+					dismissUrlPopMenu();
 				} else if (mUrlPopupWindow != null && mUrlPopupWindow.isShowing()) {
 					dismissUrlPopMenu();
 				} else {

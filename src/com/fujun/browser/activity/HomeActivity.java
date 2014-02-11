@@ -913,10 +913,15 @@ public class HomeActivity extends BaseFragmentActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == Constants.FAV_ACTIVITY_REQUEST_CODE
-				&& resultCode == RESULT_OK && data != null) {
-			String url = data.getStringExtra(Constants.FAV_RESULT_EXTRA_URL);
-			createNewTab(url, true);
+		if (resultCode == RESULT_OK && data != null) {
+			if (requestCode == Constants.FAV_ACTIVITY_REQUEST_CODE) {
+				String url = data.getStringExtra(Constants.FAV_RESULT_EXTRA_URL);
+				createNewTab(url, true);
+			} else if (requestCode == Constants.REQUEST_GET_QRCODE) {
+				String url = data == null ? "" : data
+						.getStringExtra(Constants.EXTRA_QRCODE);
+				createNewTab(url, true);
+			}
 		}
 	}
 

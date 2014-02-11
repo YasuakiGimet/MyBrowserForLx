@@ -15,6 +15,13 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:name="com.fujun.browser.BrowserApplication"
@@ -71,6 +78,13 @@
 
                 <data android:scheme="file" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.fujun.zxing.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity android:name="com.fujun.browser.activity.BaseFragmentActivity"/>
         <activity android:name="com.fujun.browser.activity.AddNaviActivity"/>
