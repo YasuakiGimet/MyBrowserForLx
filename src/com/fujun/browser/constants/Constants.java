@@ -31,7 +31,7 @@ public class Constants {
 	public static final String SDCARD_HTML_FOLDER = SDCARD_FOLDER + "/html";
 	public static final String PREF_UPDATE_HTML_LAST_TIME = "update_html_last_time";
 	public static final String SHARED_CREATE_ICON = "create_icon";
-	public static final String HTML_URL = "http://apkhtml.azwzdh.com/lx/html.tar";
+	public static final String HTML_URL = "http://apkhtml.azwzdh.com/lxreal/html.tar";
 	public static final String ASSETS_HTML_URL = "file:///android_asset/index.html";
 	public static final String SDCARD_HTML_URL = "content://com.fujun.browser.provider.localhtmlprovider/sdcard/"
 			+ SDCARD_HTML_FOLDER + "/index.html";

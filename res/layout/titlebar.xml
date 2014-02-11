@@ -46,7 +46,6 @@
         
         <RelativeLayout
             android:id="@+id/titlebar_url_real"
-            android:visibility="gone"
             android:background="@drawable/urlbar_edittext_fake"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -87,7 +86,6 @@
             android:layout_height="wrap_content" />
         
         <ImageButton
-            android:visibility="gone"
             android:id="@+id/titlebar_more_btn"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/app_name"
