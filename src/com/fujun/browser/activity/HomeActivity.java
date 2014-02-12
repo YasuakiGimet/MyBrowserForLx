@@ -745,6 +745,7 @@ public class HomeActivity extends BaseFragmentActivity implements
 						// dismiss TabPopupWindow
 						dismissTabPopupWindow();
 					}
+					onLoadingStateChanged(mCurrentTab.getLoading());
 				}
 			});
 

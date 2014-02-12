@@ -38,7 +38,7 @@ public class IndexNaviFragmentNew extends Fragment {
 			urlString = Constants.ASSETS_HTML_URL;
 		}
 		if (Constants.DEBUG) {
-			Log.e("fujun", "mIndexUrl = " + mIndexUrl);
+			Log.e("fujun", "mIndexUrl = " + urlString);
 		}
 		return urlString;
 	}
