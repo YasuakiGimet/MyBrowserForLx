@@ -23,7 +23,7 @@ public class NotificationUtils {
 		Builder builder = new Builder(context);
 		builder.setTicker(context.getString(R.string.notifi_download_start));
 		builder.setOngoing(true);
-		builder.setSmallIcon(R.drawable.ic_launcher);
+		builder.setSmallIcon(android.R.drawable.stat_sys_download);
 		builder.setContentTitle((String) item.fileName);
 		RemoteViews content = new RemoteViews(context.getPackageName(),
 				R.layout.notification_progress_layout);
@@ -38,7 +38,7 @@ public class NotificationUtils {
 	public static Notification getDownloadedNotification(Context context, DownloadItem item) {
 		Builder builder = new Builder(context);
 		builder.setTicker(context.getString(R.string.notifi_download_done));
-		builder.setSmallIcon(R.drawable.ic_launcher);
+		builder.setSmallIcon(android.R.drawable.stat_sys_download_done);
 		builder.setContentTitle((String) item.fileName);
 		builder.setOngoing(false);
 		builder.setAutoCancel(true);
