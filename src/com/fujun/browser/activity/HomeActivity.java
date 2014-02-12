@@ -25,6 +25,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -921,6 +922,7 @@ public class HomeActivity extends BaseFragmentActivity implements
 			} else if (requestCode == Constants.REQUEST_GET_QRCODE) {
 				String url = data == null ? "" : data
 						.getStringExtra(Constants.EXTRA_QRCODE);
+				Log.e("fujun", "url " + url);
 				createNewTab(url, true);
 			}
 		}

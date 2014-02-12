@@ -2,6 +2,7 @@
 package com.fujun.browser.utils;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -50,5 +51,9 @@ public class MyWebViewClient extends WebViewClient {
 		mTab.setLoading(false);
 		mTab.onWebViewMove();
 		view.requestFocus();
+		if (TextUtils.isEmpty(mTab.getCurrentTitle())) {
+			mTab.setCurrentTitle(url);
+			mTitleBar.setTitle(url);
+		}
 	}
 }
