@@ -41,8 +41,8 @@ public final class CameraManager {
 
 	private static final int MIN_FRAME_WIDTH = 240;
 	private static final int MIN_FRAME_HEIGHT = 240;
-	private static final int MAX_FRAME_WIDTH = 480;
-	private static final int MAX_FRAME_HEIGHT = 360;
+	private static final int MAX_FRAME_WIDTH = 640;
+	private static final int MAX_FRAME_HEIGHT = 640;
 
 	private static CameraManager cameraManager;
 
@@ -81,8 +81,7 @@ public final class CameraManager {
 	/**
 	 * Initializes this static object with the Context of the calling Activity.
 	 * 
-	 * @param context
-	 *            The Activity which wants to use the camera.
+	 * @param context The Activity which wants to use the camera.
 	 */
 	public static void init(Context context) {
 		if (cameraManager == null) {
@@ -126,11 +125,9 @@ public final class CameraManager {
 	/**
 	 * Opens the camera driver and initializes the hardware parameters.
 	 * 
-	 * @param holder
-	 *            The surface object which the camera will draw preview frames
-	 *            into.
-	 * @throws IOException
-	 *             Indicates the camera driver failed to open.
+	 * @param holder The surface object which the camera will draw preview
+	 *            frames into.
+	 * @throws IOException Indicates the camera driver failed to open.
 	 */
 	public void openDriver(SurfaceHolder holder) throws IOException {
 		if (camera == null) {
@@ -198,10 +195,8 @@ public final class CameraManager {
 	 * will arrive as byte[] in the message.obj field, with width and height
 	 * encoded as message.arg1 and message.arg2, respectively.
 	 * 
-	 * @param handler
-	 *            The handler to send the message to.
-	 * @param message
-	 *            The what field of the message to be sent.
+	 * @param handler The handler to send the message to.
+	 * @param message The what field of the message to be sent.
 	 */
 	public void requestPreviewFrame(Handler handler, int message) {
 		if (camera != null && previewing) {
@@ -217,10 +212,8 @@ public final class CameraManager {
 	/**
 	 * Asks the camera hardware to perform an autofocus.
 	 * 
-	 * @param handler
-	 *            The Handler to notify when the autofocus completes.
-	 * @param message
-	 *            The message to deliver.
+	 * @param handler The Handler to notify when the autofocus completes.
+	 * @param message The message to deliver.
 	 */
 	public void requestAutoFocus(Handler handler, int message) {
 		if (camera != null && previewing) {
@@ -257,7 +250,7 @@ public final class CameraManager {
 				height = MAX_FRAME_HEIGHT;
 			}
 			int leftOffset = (screenResolution.x - width) / 2;
-			int topOffset = (screenResolution.y - height) / 3;
+			int topOffset = (screenResolution.y - height) / 2;
 			framingRect = new Rect(leftOffset, topOffset, leftOffset + width,
 					topOffset + height);
 			Log.d(TAG, "Calculated framing rect: " + framingRect);
@@ -287,8 +280,7 @@ public final class CameraManager {
 	 * Converts the result points from still resolution coordinates to screen
 	 * coordinates.
 	 * 
-	 * @param points
-	 *            The points returned by the Reader subclass through
+	 * @param points The points returned by the Reader subclass through
 	 *            Result.getResultPoints().
 	 * @return An array of Points scaled to the size of the framing rect and
 	 *         offset appropriately so they can be drawn in screen coordinates.
@@ -306,12 +298,9 @@ public final class CameraManager {
 	 * A factory method to build the appropriate LuminanceSource object based on
 	 * the format of the preview buffers, as described by Camera.Parameters.
 	 * 
-	 * @param data
-	 *            A preview frame.
-	 * @param width
-	 *            The width of the image.
-	 * @param height
-	 *            The height of the image.
+	 * @param data A preview frame.
+	 * @param width The width of the image.
+	 * @param height The height of the image.
 	 * @return A PlanarYUVLuminanceSource instance.
 	 */
 	public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data,
@@ -323,22 +312,25 @@ public final class CameraManager {
 		// This is the standard Android format which all devices are REQUIRED to
 		// support.
 		// In theory, it's the only one we should ever care about.
-		case PixelFormat.YCbCr_420_SP:
-			// This format has never been seen in the wild, but is compatible as
-			// we only care
-			// about the Y channel, so allow it.
-		case PixelFormat.YCbCr_422_SP:
-			return new PlanarYUVLuminanceSource(data, width, height, rect.left,
-					rect.top, rect.width(), rect.height());
-		default:
-			// The Samsung Moment incorrectly uses this variant instead of the
-			// 'sp' version.
-			// Fortunately, it too has all the Y data up front, so we can read
-			// it.
-			if ("yuv420p".equals(previewFormatString)) {
-				return new PlanarYUVLuminanceSource(data, width, height,
-						rect.left, rect.top, rect.width(), rect.height());
-			}
+			case PixelFormat.YCbCr_420_SP:
+				// This format has never been seen in the wild, but is
+				// compatible as
+				// we only care
+				// about the Y channel, so allow it.
+			case PixelFormat.YCbCr_422_SP:
+				return new PlanarYUVLuminanceSource(data, width, height, rect.left,
+						rect.top, rect.width(), rect.height());
+			default:
+				// The Samsung Moment incorrectly uses this variant instead of
+				// the
+				// 'sp' version.
+				// Fortunately, it too has all the Y data up front, so we can
+				// read
+				// it.
+				if ("yuv420p".equals(previewFormatString)) {
+					return new PlanarYUVLuminanceSource(data, width, height,
+							rect.left, rect.top, rect.width(), rect.height());
+				}
 		}
 		throw new IllegalArgumentException("Unsupported picture format: "
 				+ previewFormat + '/' + previewFormatString);

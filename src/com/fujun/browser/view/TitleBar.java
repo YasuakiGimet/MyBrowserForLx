@@ -46,6 +46,7 @@ public class TitleBar extends LinearLayout implements OnClickListener {
 	private ImageButton mMoreButton;
 	private Tab mTab;
 	private PopupWindow mUrlPopupWindow;
+	private PopupWindow mMorePopupWindow;
 	private EditText mUrlEditText;
 	private InputMethodManager mInputMethodManager;
 
@@ -200,13 +201,38 @@ public class TitleBar extends LinearLayout implements OnClickListener {
 		}
 	}
 
+	private void showMorePopup() {
+		View view = LayoutInflater.from(getContext()).inflate(
+				R.layout.url_more_popup_layout, null);
+		mMorePopupWindow = new PopupWindow(view,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+		mMorePopupWindow.setFocusable(true);
+		mMorePopupWindow.setBackgroundDrawable(new ColorDrawable(
+				Color.TRANSPARENT));
+		mMorePopupWindow.showAsDropDown(mMoreButton);
+
+		view.findViewById(R.id.url_menu_barcode).setOnClickListener(this);
+	}
+
+	private void dismissMorePopMenu() {
+		if (mMorePopupWindow != null) {
+			mMorePopupWindow.dismiss();
+			mMorePopupWindow = null;
+		}
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.titlebar_more_btn:
+			case R.id.url_menu_barcode:
 				((HomeActivity) getContext()).startActivityForResult(
 						new Intent(getContext(), CaptureActivity.class),
 						Constants.REQUEST_GET_QRCODE);
+				dismissMorePopMenu();
+				break;
+			case R.id.titlebar_more_btn:
+				showMorePopup();
 				break;
 			case R.id.titlebar_refresh:
 				mTab.refresh();

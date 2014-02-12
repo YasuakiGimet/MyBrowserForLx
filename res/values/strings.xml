@@ -31,6 +31,7 @@
     <string name="dialog_negative_cancel">取消</string>
     <string name="fav_manage_title">收藏管理</string>
     <string name="fav_manage_delete">删除(%1$d)</string>
+    <string name="url_pop_menu_barcode">二维码</string>
     <string name="url_pop_menu_add_fav">加入收藏</string>
     <string name="url_pop_menu_open_fav_his">收藏/历史</string>
     <string name="url_pop_menu_add_navi">加入导航</string>
